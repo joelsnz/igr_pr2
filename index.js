@@ -30,12 +30,6 @@ app.get('/estado', (req, res) => {
     res.json(fabrica);
 });
 
-app.post('/estadoPuerta', (req, res) => {
-    fabrica.puerta.estado = req.body.puerta.estado;
-    fabrica.puerta.ultimoAcceso = req.body.puerta.ultimoAcceso;
-});
-
-app.post('/estadoPrensa', (req, res) => {
-    fabrica.prensa.estado = req.body.prensa.estado;
-    fabrica.prensa.ciclos = req.body.prensa.ciclos;
+app.post('/estado', (req, res) => {
+    fabrica = req.body;
 });
