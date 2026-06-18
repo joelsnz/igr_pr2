@@ -9,7 +9,7 @@ let fabrica = {
     nivelEnergia: 100,
     puerta: {
         estado: "cerrada",
-        ultimoAcceso: ""
+        ultimoAcceso: "no acceso"
     },
     prensa: {
         estado: "apagada",
