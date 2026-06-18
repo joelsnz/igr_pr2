@@ -8,7 +8,7 @@ let ultimoAcceso = "";
 
 app.get('/estadoPuerta', (req, res) => {
     res.json({
-        estado: estadoActual,
+        estado: estadoPuerta,
         ultimoAcceso: ultimoAcceso
     });
 });
@@ -19,6 +19,6 @@ app.listen(PORT, () => {
 });
 
 app.post('/estadoPuerta', (req, res) => {
-    estadoActual = req.body.estado;
+    estadoPuerta = req.body.estado;
     ultimoAcceso = req.body.ultimoAcceso;
 });
