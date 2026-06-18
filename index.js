@@ -3,14 +3,23 @@ const app = express();
 
 app.use(express.json())
 
-let estadoPuerta = "cerrada";
-let ultimoAcceso = "";
-
-let estadoPrensa = "apagada";
-let ciclos = 0;
-
-let estadoGenerador = "normal";
-let energia = 100;
+let fabrica = {
+    modoFabrica: "normal",
+    alarma: false,
+    nivelEnergia: 100,
+    puerta: {
+        estado: "cerrada",
+        ultimoAcceso: ""
+    },
+    prensa: {
+        estado: "apagada",
+        ciclos: 0
+    },
+    generador: {
+        estado: "normal",
+        consumo: 0
+    }
+};
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -19,36 +28,28 @@ app.listen(PORT, () => {
 
 app.get('/estadoPuerta', (req, res) => {
     res.json({
-        estado: estadoPuerta,
-        ultimoAcceso: ultimoAcceso
+        puerta: {
+            estado: estadoPuerta,
+            ultimoAcceso: ultimoAcceso
+        }
     });
 });
 
 app.post('/estadoPuerta', (req, res) => {
-    estadoPuerta = req.body.estado;
-    ultimoAcceso = req.body.ultimoAcceso;
+    fabrica.puerta.estado = req.body.puerta.estado;
+    fabrica.puerta.ultimoAcceso = req.body.puerta.ultimoAcceso;
 });
 
 app.get('/estadoPrensa', (req, res) => {
     res.json({
-        estado: estadoPrensa,
-        ciclos: ciclos
+        prensa: {
+            estado: estadoPrensa,
+            ciclos: ciclos
+        }
     });
 });
 
 app.post('/estadoPrensa', (req, res) => {
-    estadoPrensa = req.body.estado;
-    ciclos = req.body.ciclos;
-});
-
-app.get('/estadoGenerador', (req, res) => {
-    res.json({
-        estado: estadoPrensa,
-        ciclos: ciclos
-    });
-});
-
-app.post('/estadoGenerador', (req, res) => {
-    estadoGenerador = req.body.estado;
-    energia = req.body.energia;
+    fabrica.prensa.estado = req.body.prensa.estado;
+    fabrica.prensa.ciclos = req.body.prensa.ciclos;
 });
