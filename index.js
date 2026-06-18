@@ -7,7 +7,10 @@ let estadoPuerta = "cerrada";
 let ultimoAcceso = "";
 
 let estadoPrensa = "apagada";
-let ciclos = -1;
+let ciclos = 0;
+
+let estadoGenerador = "normal";
+let energia = 100;
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -36,4 +39,16 @@ app.get('/estadoPrensa', (req, res) => {
 app.post('/estadoPrensa', (req, res) => {
     estadoPrensa = req.body.estado;
     ciclos = req.body.ciclos;
+});
+
+app.get('/estadoGenerador', (req, res) => {
+    res.json({
+        estado: estadoPrensa,
+        ciclos: ciclos
+    });
+});
+
+app.post('/estadoGenerador', (req, res) => {
+    estadoGenerador = req.body.estado;
+    energia = req.body.energia;
 });
