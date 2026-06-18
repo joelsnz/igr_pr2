@@ -26,27 +26,13 @@ app.listen(PORT, () => {
     console.log("Servidor funcionando");
 });
 
-app.get('/estadoPuerta', (req, res) => {
-    res.json({
-        puerta: {
-            estado: estadoPuerta,
-            ultimoAcceso: ultimoAcceso
-        }
-    });
+app.get('/estado', (req, res) => {
+    res.json(fabrica);
 });
 
 app.post('/estadoPuerta', (req, res) => {
     fabrica.puerta.estado = req.body.puerta.estado;
     fabrica.puerta.ultimoAcceso = req.body.puerta.ultimoAcceso;
-});
-
-app.get('/estadoPrensa', (req, res) => {
-    res.json({
-        prensa: {
-            estado: estadoPrensa,
-            ciclos: ciclos
-        }
-    });
 });
 
 app.post('/estadoPrensa', (req, res) => {
